@@ -1,7 +1,7 @@
 
 #include "../so_long.h"
 
-void	interpret_map(t_map *map, char *file)
+void	interpret_map(t_data *data, char *file)
 {
 	int		fd;
 	int		i;
@@ -19,14 +19,14 @@ void	interpret_map(t_map *map, char *file)
 		if (bytes != 1)
 			break ;
 		if (buffer[0] != '\n' && buffer[0] != '\0')
-			map->map_arr[i] =  ft_strjoin(map->map_arr[i],buffer);
+			data->map_arr[i] =  ft_strjoin(data->map_arr[i],buffer);
 		else
 			i++;
 	}
 	close(fd);
 }
 
-void get_map_size(int fd,t_data *data){
+int get_map_size(int fd,t_data *data){
 	char buffer;
 	int row_count;
 	int col_count;
@@ -41,7 +41,7 @@ void get_map_size(int fd,t_data *data){
             if(col_count == -1) 
 				col_count = i;
 			else if(i != col_count)
-				error_exit("Error\nInvalid map shape\n");
+				return -1;
             i = 0;
         }
         else 
@@ -50,6 +50,7 @@ void get_map_size(int fd,t_data *data){
 	
 	data->col_count = col_count;
 	data->row_count = row_count;
+	return 0;
 }
 
 
@@ -60,14 +61,18 @@ void init_map(t_data *data,char **argv){
 
 	file = argv[1];
 	len = ft_strlen(file);
-	printf("%s:%d\n",file,len);
 	fd = open(file,O_RDONLY);
 	if(fd == -1)
-		error_exit("Error\nFailed to open file\n");
-	if(len <= 4 || ft_strncmp(file + len - 4, ".ber",4) != 0)
-		error_exit("Error\nInvalid file format\n");
+		error_exit("Error\nFailed to open file: Check file name\n",data);
+	if(len <= 4 || ft_strncmp(file + len - 4, ".ber",4) != 0){
+		close(fd);
+		error_exit("Error\nInvalid file format\n",data);
+	}
 	
-	get_map_size(fd,data);
+	if(get_map_size(fd,data) == -1){
+		close(fd);
+		error_exit("Error\nInvalid map shape\n",data);
+	}
 
 	data->step_count= 0;
 	data->item_count = 0;

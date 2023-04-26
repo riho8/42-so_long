@@ -1,32 +1,27 @@
 #include "../so_long.h"
 
-void free_map(t_map *map){
+void free_map(t_data *data){
 	int i;
 
 	i=0;
-	while(map->map_arr[i] != NULL){
-		free(map->map_arr[i]);
+	while(data->map_arr[i] != NULL){
+		free(data->map_arr[i]);
 		i++;
 	}
-	free(map->map_arr);
+	free(data->map_arr);
 }
 
-void	error_exit(char *str)
+
+void	error_exit(char *str,t_data *data)
 {	
-	// if(map == 1)
-	// 	free_map(map);
-	// if(fd != -1)
-	// 	close(fd);
-	// if(win != NULL)
-	// 	mlx_destroy_window(mlx, win);
-	// if(img != NULL){
-	// 	mlx_destroy_image(mlx, img->img);
-	// 	free(img);
-	// }
-	// if(mlx != NULL){
-	// 	mlx_destroy_display(mlx);
-	// 	free(mlx);
-	// }
+	if(data->map_arr != NULL)
+		free_map(data);
+	if(data->win != NULL)
+		mlx_destroy_window(data->mlx, data->win);
+	if(data->mlx != NULL){
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 	
 	perror(str);
 	exit(EXIT_FAILURE);

@@ -1,5 +1,14 @@
 #include "../so_long.h"
 
+int close_game(t_data *data){
+	free_map(data);
+	mlx_destroy_window(data->mlx,data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	printf("🎉Congulatulations!You WIN!🎉\n");
+	exit(EXIT_SUCCESS);
+}
+
 int handle_keypress(int keysym, t_data *data){
 	if(keysym == XK_Escape)
 		mlx_destroy_window(data->mlx,data->win);
@@ -12,13 +21,6 @@ int handle_keypress(int keysym, t_data *data){
 	else if(keysym == XK_d || keysym == XK_Right)
 		move_player(data,'x',1);
 	return 0;
-}
-int close_game(t_data *data){
-	mlx_destroy_window(data->mlx,data->win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	printf("🎉Congulatulations!You WIN!🎉\n");
-	exit(EXIT_SUCCESS);
 }
 
 void set_hook(t_data *data){

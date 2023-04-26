@@ -12,7 +12,6 @@
 #include "libft/libft.h"
 
 //define
-#define MLX_ERROR 1
 #define CELL_W 40
 #define CELL_H 40
 
@@ -26,14 +25,6 @@ typedef struct s_img
 	void *wall;
 }	t_img;
 
-typedef struct s_map
-{
-	char **map_arr;
-	int x;
-	int y;
-	int item_total;
-}	t_map;
-
 typedef struct s_data
 {
 	void *mlx;
@@ -44,25 +35,26 @@ typedef struct s_data
 	int pos_y;
 	int step_count;
 	int item_count;
-	t_map *map;
+	int item_total;
+	char **map_arr;
 	t_img *img;
 }	t_data;
 
 
 // so_long.c
 
-//ber_to_map.c
+//map.c
 void init_map(t_data *data,char **argv);
-void get_map_size(int fd,t_data *data);
-void interpret_map(t_map *map, char *file);
+int get_map_size(int fd,t_data *data);
+void interpret_map(t_data *data, char *file);
 
 //check_map.c
-void check_map(t_map *map,t_data *data);
+void check_map(t_data *data);
 int count_target(char *str,char target);
 
 //error_free_exit.c
-void	error_exit(char *str);
-void free_map(t_map *map);
+void	error_exit(char *str,t_data *data);
+void free_map(t_data *data);
 
 //image.c
 void init_image(t_data *data);
