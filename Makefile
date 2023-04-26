@@ -1,9 +1,9 @@
 NAME = so_long
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MLX = mlx_linux/Makefile.gen
+MLX = mlx_linux/libmlx_Darwin.a
 LIBFT = libft/libft.a
-LIB = -L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+LIB = -L ./libft -lft  -L/usr/X11R6/lib -lX11 -lXext -framework OpenGL -framework AppKit 
 SRCS = src/so_long.c \
 		src/map.c \
 		src/check_map.c \

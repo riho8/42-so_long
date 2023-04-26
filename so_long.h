@@ -2,8 +2,7 @@
 #define SO_LONG_H
 
 //include
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
+
 #include <mlx.h>
 #include<stdlib.h>
 #include <stdio.h>
