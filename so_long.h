@@ -10,6 +10,7 @@
 #include <unistd.h>
 # include <fcntl.h>
 #include "libft/libft.h"
+#include "ft_printf/ft_printf.h"
 
 //define
 #define CELL_W 40

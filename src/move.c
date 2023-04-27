@@ -3,7 +3,7 @@
 void collect_item(t_data *data)
 {
 	data->item_count++;
-	printf("Collect %d item✅\n",data->item_count);
+	ft_printf("Collect %d item✅\n",data->item_count);
 	data->map_arr[data->pos_y][data->pos_x] = '0';
 	mlx_put_image_to_window(data->mlx, data->win, data->img->background,
 		(data->pos_x * CELL_W), (data->pos_y * CELL_H));
@@ -54,5 +54,5 @@ void move_player(t_data *data, char axis, int dir){
 	mlx_do_sync(data->mlx);
   
    //shellに表示
-	printf("Total move: %d\n", ++data->step_count);//!ft_printfにする
+	ft_printf("Total move: %d\n", ++data->step_count);//!ft_printfにする
 }

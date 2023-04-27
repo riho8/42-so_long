@@ -24,7 +24,7 @@ void check_map(t_data *data){
 	player = 0;
 	exit = 0;
 	item = 0;
-	printf("%d\n",data->col_count);
+	ft_printf("%d\n",data->col_count);
 	while(data->map_arr && data->map_arr[i]){
 		if((i == 0 || i == data->row_count- 1) && count_target(data->map_arr[i],'1') != data->col_count)
 				error_exit("Error\nSurround map by walls!\n",data);
