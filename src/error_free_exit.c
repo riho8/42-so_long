@@ -23,6 +23,6 @@ void	error_exit(char *str,t_data *data)
 		free(data->mlx);
 	}
 	
-	perror(str);
+	ft_printf("%s",str);
 	exit(EXIT_FAILURE);
 }

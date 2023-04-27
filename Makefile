@@ -1,12 +1,10 @@
-
-
 NAME = so_long
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX = mlx_linux/libmlx_Darwin.a
 LIBFT = libft/libft.a
 PRINTF = ft_printf/libftprintf.a
-LIB = -L ./libft -lft -L ./ft_printf -lftprintf -L ./mlx  -L/usr/X11R6/lib -lX11 -lXext -lmlx -framework OpenGL -framework AppKit -lm 
+LIB = -L ./libft -lft -L ./ft_printf -lftprintf -framework OpenGL -framework AppKit -L ./mlx -lmlx   -I/opt/X11/include -L/usr/X11R6/lib  -lX11 -lXext -lm 
 
 SRCS = src/so_long.c \
 		src/map.c \
@@ -39,7 +37,7 @@ clean:
 fclean: clean
 	$(MAKE) fclean -C libft
 	$(MAKE) fclean -C ft_printf
-  rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

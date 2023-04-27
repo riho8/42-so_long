@@ -4,7 +4,7 @@
 //include
 #include<X11/Xlib.h>
 #include<X11/Xutil.h>
-#include <mlx.h>
+#include "mlx_linux/mlx.h"
 #include<stdlib.h>
 #include <stdio.h>
 #include <unistd.h>

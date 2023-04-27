@@ -5,19 +5,21 @@ void	interpret_map(t_data *data, char *file)
 {
 	int		fd;
 	int		i;
-	int		bytes;
+	int		read_rtn;
 	char	buffer[2];
 
 	i = 0;
-	bytes = 1;
+	read_rtn = 1;
 	buffer[1] = '\0';
 
 	fd = open(file, O_RDONLY);
-	while (bytes == 1)
+	while (read_rtn == 1)
 	{
-		bytes = read(fd, buffer, 1);
-		if (bytes != 1)
+		read_rtn = read(fd, buffer, 1);
+		if (read_rtn == 0)
 			break ;
+		if (read_rtn == -1)
+			error_exit("Error\nFailed to read file\n",data);
 		if (buffer[0] != '\n' && buffer[0] != '\0')
 			data->map_arr[i] =  ft_strjoin(data->map_arr[i],buffer);
 		else
@@ -31,11 +33,18 @@ int get_map_size(int fd,t_data *data){
 	int row_count;
 	int col_count;
 	int i;
+	int read_rtn;
     
 	row_count = 0;
 	col_count = -1;
 	i = 0;
-    while(read(fd, &buffer, 1) == 1) { // !read_rtn == -1のときの処理
+	read_rtn = 1;
+    while(read_rtn == 1) { 
+		read_rtn = read(fd,&buffer,1);
+		if(read_rtn == 0)
+			break;
+		if(read_rtn == -1)
+			error_exit("Error\nFailed to read file\n",data);
         if(buffer == '\n') {
             row_count++;
             if(col_count == -1) 
@@ -64,7 +73,7 @@ void init_map(t_data *data,char **argv){
 	fd = open(file,O_RDONLY);
 	if(fd == -1)
 		error_exit("Error\nFailed to open file: Check file name\n",data);
-	if(len <= 4 || ft_strncmp(file + len - 4, ".ber",4) != 0){
+	if(len <= 9 || ft_strncmp(file + len - 4, ".ber",4) != 0){
 		close(fd);
 		error_exit("Error\nInvalid file format\n",data);
 	}
