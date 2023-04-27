@@ -2,13 +2,15 @@
 #define SO_LONG_H
 
 //include
-
+#include<X11/Xlib.h>
+#include<X11/Xutil.h>
 #include <mlx.h>
 #include<stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 # include <fcntl.h>
 #include "libft/libft.h"
+#include "ft_printf/ft_printf.h"
 
 //define
 #define CELL_W 40
